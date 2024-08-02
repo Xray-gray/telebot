@@ -1,7 +1,7 @@
 import os
 import random
 from telegram import Update
-from telegram.ext import Updater, CommandHandler, MessageHandler, filters
+from telegram.ext import Updater, CommandHandler, MessageHandler, Filters
 from telegram.ext import CallbackContext
 
 TOKEN = '7476413517:AAFfOQzIfWIRKLif2zcAsEPMNHzmwORTO6Y'
