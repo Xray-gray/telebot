@@ -16,13 +16,14 @@ def new_member(update: Update, context: CallbackContext) -> None:
     for member in update.message.new_chat_members:
         update.message.reply_text(f'Բարի գալուստ, {member.full_name}!')
 
+        try:
+            video_file = random.choice(os.listdir(VIDEO_FOLDER))
+            video_path = os.path.join(VIDEO_FOLDER, video_file)
 
-        video_file = random.choice(os.listdir(VIDEO_FOLDER))
-        video_path = os.path.join(VIDEO_FOLDER, video_file)
-
-        # Отправляем видео
-        with open(video_path, 'rb') as video:
-            context.bot.send_video(chat_id=update.message.chat_id, video=video)
+            with open(video_path, 'rb') as video:
+                context.bot.send_video(chat_id=update.message.chat_id, video=video)
+        except Exception as e:
+            print(f"Error sending video: {e}")
 
 
 def main():
