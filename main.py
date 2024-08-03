@@ -5,14 +5,14 @@ from telegram import Update
 from telegram.ext import Application, CommandHandler, MessageHandler, filters
 from telegram.ext import CallbackContext
 
-TOKEN = '7476413517:AAFfOQzIfWIRKLif2zcAsEPMNHzmwORTO6Y'
+TOKEN = os.getenv('TELEGRAM_BOT_TOKEN')  # Fetch token from environment variable
 VIDEO_FOLDER = 'videos/barev/'
 
 # Настройка логирования
 logging.basicConfig(level=logging.INFO)
 
 async def start(update: Update, context: CallbackContext) -> None:
-    await update.message.reply_text('Բարև, ես բոտ եմ, ով բարևում է բոլոր նոր մասնակիցներին :)')
+    await update.message.reply_text('Բարև, ես JARVIS բոտն եմ, ով բարևում է բոլոր նոր մասնակիցներին :)')
 
 async def new_member(update: Update, context: CallbackContext) -> None:
     if update.message.new_chat_members:
@@ -29,7 +29,7 @@ async def new_member(update: Update, context: CallbackContext) -> None:
                     await context.bot.send_video(chat_id=update.message.chat_id, video=video)
             except Exception as e:
                 logging.error(f"Error sending video: {str(e)}")
-                await update.message.reply_text(f'Произошла ошибка при отправке видео: {str(e)}')
+                await update.message.reply_text(f'Վիդեոն հետո: {str(e)}')
 
 def main():
     application = Application.builder().token(TOKEN).build()
@@ -37,7 +37,7 @@ def main():
     application.add_handler(CommandHandler("start", start))
     application.add_handler(MessageHandler(filters.StatusUpdate.NEW_CHAT_MEMBERS, new_member))
 
-    application.run_polling()  # Здесь больше не нужно await
+    application.run_polling()  # Here, `await` is not needed
 
 if __name__ == '__main__':
     main()
