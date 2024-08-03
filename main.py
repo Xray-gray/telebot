@@ -5,7 +5,7 @@ from telegram import Update
 from telegram.ext import Application, CommandHandler, MessageHandler, filters
 from telegram.ext import CallbackContext
 
-TOKEN = os.getenv('TELEGRAM_BOT_TOKEN')  # Fetch token from environment variable
+TOKEN = os.getenv('7476413517:AAFfOQzIfWIRKLif2zcAsEPMNHzmwORTO6Y')  # Fetch token from environment variable
 VIDEO_FOLDER = 'videos/barev/'
 
 # Настройка логирования
