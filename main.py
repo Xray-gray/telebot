@@ -31,18 +31,13 @@ async def new_member(update: Update, context: CallbackContext) -> None:
                 logging.error(f"Error sending video: {str(e)}")
                 await update.message.reply_text(f'Произошла ошибка при отправке видео: {str(e)}')
 
-async def main():
-    # Проверка пути к видео и доступности файлов
-    logging.info(f"Video folder path: {os.path.abspath(VIDEO_FOLDER)}")
-    logging.info(f"Files in video folder: {os.listdir(VIDEO_FOLDER)}")
-
+def main():
     application = Application.builder().token(TOKEN).build()
 
     application.add_handler(CommandHandler("start", start))
     application.add_handler(MessageHandler(filters.StatusUpdate.NEW_CHAT_MEMBERS, new_member))
 
-    await application.run_polling()
+    application.run_polling()  # Здесь больше не нужно await
 
 if __name__ == '__main__':
-    import asyncio
-    asyncio.run(main())
+    main()
